@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-    <TITLE> New Document </TITLE>
+    <TITLE> Heart </TITLE>
     <META NAME="Generator" CONTENT="EditPlus">
     <META NAME="Author" CONTENT="">
     <META NAME="Keywords" CONTENT="">
@@ -30,6 +30,8 @@
 <BODY style="background-color: #000;">
     <audio id="Music" autoplay loop muted>
         <source src="music/sau.mp3" type="audio/mpeg">
+        <!-- Fallback to a known working audio file for testing -->
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <button onclick="toggleAudio()">Play/Pause Music</button>
@@ -44,6 +46,11 @@
             console.log("Error playing audio:", error);
         });
     }, { once: true });
+
+    // Log audio loading errors
+    document.getElementById('Music').addEventListener('error', function(e) {
+        console.error('Audio error:', e);
+    });
 
     // Toggle play/pause
     function toggleAudio() {
