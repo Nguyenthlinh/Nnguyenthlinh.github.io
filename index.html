@@ -14,18 +14,49 @@
             height: 100%;
             background-color: "#2e2e2e";
         }
+        button {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
     </style>
 </HEAD>
 
 <BODY style="background-color: #000;">
-    <audio id="Music" autoplay loop>
+    <audio id="Music" autoplay loop muted>
         <source src="music/sau.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-
+    <button onclick="toggleAudio()">Play/Pause Music</button>
     <canvas id="heart"></canvas>
 
 <script>
+    // Unmute audio on user interaction
+    document.addEventListener('click', function() {
+        var audio = document.getElementById('Music');
+        audio.muted = false;
+        audio.play().catch(function(error) {
+            console.log("Error playing audio:", error);
+        });
+    }, { once: true });
+
+    // Toggle play/pause
+    function toggleAudio() {
+        var audio = document.getElementById('Music');
+        if (audio.paused) {
+            audio.play().catch(function(error) {
+                console.log("Error playing audio:", error);
+            });
+        } else {
+            audio.pause();
+        }
+    }
+
     window.requestAnimationFrame =
             window.__requestAnimationFrame ||
             window.requestAnimationFrame ||
